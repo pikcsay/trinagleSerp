@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rec</title>
+</head>
+<body style="background: black; display: flex; align-items: center; flex-direction: column;">
+    <canvas style="background: white;"></canvas>
+    <a href="https://ru.wikipedia.org/wiki/%D0%A2%D1%80%D0%B5%D1%83%D0%B3%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D0%BA_%D0%A1%D0%B5%D1%80%D0%BF%D0%B8%D0%BD%D1%81%D0%BA%D0%BE%D0%B3%D0%BE">Треугольник Серпинского</a>
+    <script>
+        const cnv = document.querySelector('canvas');
+        cnv.width = 500;
+        cnv.height = 500;
+
+        const ctx = cnv.getContext('2d');
+        ctx.fillStyle = 'black';
+
+        const size = 2;
+
+        let cells = [{'x': cnv.width / 2, 'y': 30},
+                     {'x': 30, 'y': cnv.height - 30},
+                     {'x': cnv.width - 30, 'y': cnv.height - 30}]
+        
+        for (let cell of cells) {
+            ctx.fillRect(cell.x, cell.y, size, size);
+        }
+
+        let mCell = {'x': cells[0].x, 'y': cells[0].y}
+        let i = 1, x, y;
+
+        setInterval(update, 2);
+        function update() {
+            x = (mCell.x + cells[i].x) / 2;
+            y = (mCell.y + cells[i].y) / 2;
+            ctx.fillRect(x, y, size, size);
+            mCell = {x, y};
+            i = ~~(Math.random() * cells.length);
+        }
+        
+    </script>
+</body>
+</html>
